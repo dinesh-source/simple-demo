@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Catch the Box Game</title>
+    <style>
+        #game-container {
+            width: 400px;
+            height: 400px;
+            border: 2px solid black;
+            position: relative;
+            background: #f0f0f0;
+            overflow: hidden;
+        }
+        
+        #target {
+            width: 50px;
+            height: 50px;
+            background-color: #ff4444;
+            position: absolute;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        #score {
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        
+        #target:hover {
+            background-color: #ff6666;
+        }
+    </style>
+</head>
+<body>
+    <div id="score">Score: <span id="score-value">0</span></div>
+    <div id="game-container">
+        <div id="target"></div>
+    </div>
+
+    <script>
+        const target = document.getElementById('target');
+        const container = document.getElementById('game-container');
+        const scoreElement = document.getElementById('score-value');
+        let score = 0;
+
+        function moveTarget() {
+            const maxX = container.clientWidth - target.clientWidth;
+            const maxY = container.clientHeight - target.clientHeight;
+            
+            const newX = Math.floor(Math.random() * maxX);
+            const newY = Math.floor(Math.random() * maxY);
+            
+            target.style.left = newX + 'px';
+            target.style.top = newY + 'px';
+        }
+
+        target.addEventListener('click', () => {
+            score += 1;
+            scoreElement.textContent = score;
+            moveTarget();
+        });
+
+        // Initial position
+        moveTarget();
+    </script>
+</body>
+</html>
